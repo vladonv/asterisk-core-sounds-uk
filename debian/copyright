@@ -1,0 +1,17 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: asterisk-core-sounds-uk
+Source: https://github.com/vladonv/asterisk-core-sounds-uk
+
+Files: *
+Copyright: 2017-2022 Viktor Donner <info@vikdon.com>
+License: CC-BY-SA-4.0
+
+Files: debian/*
+Copyright: 2026 Vlad Vorobyev <vlad.vorobev@gmail.com>
+License: CC-BY-SA-4.0
+
+License: CC-BY-SA-4.0
+ Creative Commons Attribution-ShareAlike 4.0 International. The full
+ license text is shipped in this package as
+ /usr/share/doc/asterisk-core-sounds-uk/LICENSE-asterisk-core-uk, and is
+ also available at https://creativecommons.org/licenses/by-sa/4.0/legalcode

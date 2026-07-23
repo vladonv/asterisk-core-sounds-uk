@@ -1,0 +1,12 @@
+*.alaw var/lib/asterisk/sounds/uk_UA
+*.g722 var/lib/asterisk/sounds/uk_UA
+*.gsm var/lib/asterisk/sounds/uk_UA
+*.sln16 var/lib/asterisk/sounds/uk_UA
+*.ulaw var/lib/asterisk/sounds/uk_UA
+*.wav var/lib/asterisk/sounds/uk_UA
+digits/* var/lib/asterisk/sounds/uk_UA/digits
+letters/* var/lib/asterisk/sounds/uk_UA/letters
+dictate/* var/lib/asterisk/sounds/uk_UA/dictate
+followme/* var/lib/asterisk/sounds/uk_UA/followme
+phonetic/* var/lib/asterisk/sounds/uk_UA/phonetic
+silence/* var/lib/asterisk/sounds/uk_UA/silence

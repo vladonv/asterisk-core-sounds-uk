@@ -1,0 +1,57 @@
+name: Build and publish .deb package
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential devscripts debhelper dpkg-dev lintian
+
+      - name: Build .deb package
+        run: dpkg-buildpackage -us -uc -b
+
+      - name: Lint built package
+        run: lintian ../asterisk-core-sounds-uk_*.deb
+
+      - name: Collect build artifacts
+        run: |
+          mkdir -p dist
+          mv ../asterisk-core-sounds-uk_*.deb dist/
+          mv ../asterisk-core-sounds-uk_*.changes ../asterisk-core-sounds-uk_*.buildinfo dist/
+
+      - name: Read package version
+        id: version
+        run: echo "version=$(dpkg-parsechangelog -S Version)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: deb-package-${{ steps.version.outputs.version }}
+          path: dist/*
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="v${{ steps.version.outputs.version }}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists, skipping (bump debian/changelog to publish a new one)."
+          else
+            gh release create "$tag" dist/* \
+              --title "$tag" \
+              --notes "Built from ${{ github.sha }}. See debian/changelog for details."
+          fi

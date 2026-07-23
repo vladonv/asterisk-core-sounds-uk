@@ -1,0 +1,21 @@
+Source: asterisk-core-sounds-uk
+Section: comm
+Priority: optional
+Maintainer: Vlad Vorobyev <vlad.vorobev@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/vladonv/asterisk-core-sounds-uk
+Rules-Requires-Root: no
+
+Package: asterisk-core-sounds-uk
+Architecture: all
+Depends: ${misc:Depends}
+Description: Ukrainian core Asterisk sound prompts
+ Ukrainian-language recordings of Asterisk's core sound prompts (system
+ messages, digits, letters, phonetic alphabet, dictation, and Follow Me
+ prompts), in alaw/g722/gsm/sln16/ulaw/wav formats.
+ .
+ Installs into /var/lib/asterisk/sounds/uk_UA, matching the "uk_UA"
+ custom Sound Language convention used by FreePBX's Sound Languages
+ module - install this package, then select it as a Sound Language in
+ FreePBX (registering "uk_UA" there first if it isn't already).

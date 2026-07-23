@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+SOUNDS_DIR=/var/lib/asterisk/sounds/uk_UA
+
+case "$1" in
+    configure)
+        # No Depends on an "asterisk" package: on FreePBX/Sangoma-based
+        # installs Asterisk itself isn't apt-managed at all, so such a
+        # dependency would be unsatisfiable. The asterisk system user is
+        # normally already present by the time this package is installed;
+        # guard anyway rather than fail the whole install if it isn't.
+        if getent passwd asterisk >/dev/null; then
+            chown -R --no-dereference asterisk:asterisk "$SOUNDS_DIR"
+        fi
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
